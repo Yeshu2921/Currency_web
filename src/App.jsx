@@ -19,9 +19,7 @@ function App() {
       const data = await response.json();
       const rate = data[fromCurr.value.toLowerCase()][toCurr.value.toLowerCase()];
       setResultMsg(`${amount} ${fromCurr.value} = ${(amount * rate).toFixed(2)} ${toCurr.value}`);
-    } catch (e) {
-      setResultMsg("Error!");
-    }
+    } catch (e) { setResultMsg("Error!"); }
   };
 
   useEffect(() => { updateExchangeRate(); }, []);
@@ -32,9 +30,10 @@ function App() {
       background: "transparent",
       border: "none",
       boxShadow: "none",
-      fontSize: "1.2rem",
-      fontWeight: "bold",
+      minHeight: "30px",
+      fontSize: "0.9rem",
     }),
+    menu: (base) => ({ ...base, zIndex: 9999 })
   };
 
   return (
@@ -49,35 +48,49 @@ function App() {
 
       {displayInfo && (
         <div className="details-panel">
-          <p><strong>From:</strong> {countryData[fromCurr.value].name} ({countryData[fromCurr.value].country})</p>
-          <p><strong>To:</strong> {countryData[toCurr.value].name} ({countryData[toCurr.value].country})</p>
+          <p><strong>From:</strong> {countryData[fromCurr.value].name}</p>
+          <p><strong>To:</strong> {countryData[toCurr.value].name}</p>
         </div>
       )}
 
-      <form onSubmit={(e) => { e.preventDefault(); updateExchangeRate(); }}>
+      <form onSubmit={(e) => { e.preventDefault(); updateExchangeRate(); }} style={{display: 'contents'}}>
         <div className="amount">
-          <p>Enter Amount</p>
+          <p>Amount</p>
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </div>
 
         <div className="dropdown">
           <div className="select-container">
-            <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} alt="flag" />
-            <Select options={currencyOptions} value={fromCurr} onChange={setFromCurr} styles={selectStyles} isSearchable={false} />
+            <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} />
+            <Select 
+              options={currencyOptions} 
+              value={fromCurr} 
+              onChange={setFromCurr} 
+              styles={selectStyles} 
+              isSearchable={true} 
+              menuPlacement="auto"
+            />
           </div>
 
           <div className="swap-icon-wrapper" onClick={() => { setFromCurr(toCurr); setToCurr(fromCurr); }}>
-            <ArrowLeftRight size={28} />
+            <ArrowLeftRight size={20} />
           </div>
 
           <div className="select-container">
-            <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} alt="flag" />
-            <Select options={currencyOptions} value={toCurr} onChange={setToCurr} styles={selectStyles} isSearchable={false} />
+            <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} />
+            <Select 
+              options={currencyOptions} 
+              value={toCurr} 
+              onChange={setToCurr} 
+              styles={selectStyles} 
+              isSearchable={true} 
+              menuPlacement="auto"
+            />
           </div>
         </div>
 
         <div className="msg">{resultMsg}</div>
-        <button type="submit">Get Exchange Rate</button>
+        <button type="submit">Get Rate</button>
       </form>
     </div>
   );

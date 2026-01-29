@@ -4,60 +4,64 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh; /* Fixed height to match device */
+  width: 100vw;
   background-color: #feece2;
   font-family: "Arial Black", sans-serif;
-  padding: 10px; /* Small space around the edge */
+  overflow: hidden; /* No scrolling */
 }
 
 .container {
   background-color: #ffbe98;
-  padding: 2.5rem 1.5rem;
-  border-radius: 2rem;
-  border: 4px groove #feece2;
+  padding: 1rem;
+  border: 3px groove #feece2;
   
-  /* MAXIMIZE CONTAINER SIZE */
-  width: 98%;           /* Fills almost the whole screen width */
-  max-width: 650px;     /* Prevents it from getting too wide on tablets */
-  min-height: 80vh;     /* Makes it tall */
+  /* MINIMIZE TO DEVICE HEIGHT */
+  width: 100%;
+  height: 100vh; 
+  max-width: 450px; /* Looks good on both phone and desktop */
   
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  justify-content: space-between; /* Spreads elements out evenly */
   position: relative;
 }
 
-h2 {
-  font-size: 2.5rem; /* Huge Header */
-  text-align: center;
-  margin-bottom: 2rem;
-  background-color: #feece2;
-  border-radius: 1rem;
-  padding: 1rem;
+.top-nav { display: flex; justify-content: flex-end; }
+
+.info-link {
+  background: white;
+  border: 1px solid #333;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
 }
 
-.amount p, .from p, .to p {
-  font-size: 1.4rem; /* Big Labels */
-  margin-bottom: 8px;
+h2 {
+  font-size: 1.4rem;
+  text-align: center;
+  background-color: #feece2;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
 }
+
+.amount p, .from p, .to p { font-size: 0.9rem; margin-bottom: 2px; }
 
 .amount input {
   width: 100%;
-  border: 1px solid lightgray;
-  border-radius: 1rem;
-  height: 5rem; /* Very tall input box */
-  padding: 0 1.5rem;
-  font-size: 2rem; /* Huge numbers */
+  border-radius: 0.5rem;
+  height: 2.8rem;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
 }
 
 .dropdown {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 2rem 0;
-  gap: 10px;
+  gap: 8px;
 }
 
 .select-container {
@@ -65,61 +69,49 @@ h2 {
   flex-direction: column;
   align-items: center;
   background-color: #feece2;
-  border-radius: 1.5rem;
-  border: 2px solid #333;
-  padding: 1rem;
-  width: 45%; /* Maximize width of select boxes */
+  border-radius: 1rem;
+  border: 1px solid #333;
+  padding: 0.4rem;
+  width: 45%;
 }
 
 .select-container img {
-  width: 80px; /* Bigger Flags */
-  margin-bottom: 10px;
+  width: 40px;
+  margin-bottom: 2px;
 }
 
 .swap-icon-wrapper {
   cursor: pointer;
   background: white;
-  padding: 15px;
+  padding: 8px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  border: 2px solid #333;
+  border: 1px solid #333;
 }
 
 .msg {
-  margin: 2rem 0;
   text-align: center;
   background: #fff;
-  border-radius: 2rem;
-  padding: 2rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 1.8rem; /* Huge Results */
-  color: #333;
 }
 
 button[type="submit"] {
   width: 100%;
-  height: 5.5rem; /* Massive Button */
+  height: 3.5rem;
   background-color: #feece2;
-  border-radius: 1.5rem;
-  border: 3px dashed #333;
-  font-size: 1.8rem;
+  border-radius: 1rem;
+  border: 2px dashed #333;
+  font-size: 1.2rem;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.2s;
 }
 
-button[type="submit"]:active {
-  transform: scale(0.95);
-}
-
-/* Info Section Styles */
-.top-nav { display: flex; justify-content: flex-end; margin-bottom: 15px; }
-.info-link {
+.details-panel {
   background: white;
-  border: 1px solid #333;
-  padding: 10px 20px;
+  padding: 8px;
   border-radius: 8px;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 0.8rem;
+  border: 1px solid #333;
 }
