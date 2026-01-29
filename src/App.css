@@ -5,75 +5,59 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* Match the viewport width for a consistent scale */
-  min-width: 600px; 
   background-color: #feece2;
   font-family: "Arial Black", sans-serif;
-  overflow-x: auto;
+  padding: 10px; /* Small space around the edge */
 }
 
 .container {
   background-color: #ffbe98;
-  padding: 3rem;
-  border-radius: 3rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 2rem;
   border: 4px groove #feece2;
-  /* Fixed width slightly increased for a larger feel */
-  width: 580px; 
+  
+  /* MAXIMIZE CONTAINER SIZE */
+  width: 98%;           /* Fills almost the whole screen width */
+  max-width: 650px;     /* Prevents it from getting too wide on tablets */
+  min-height: 80vh;     /* Makes it tall */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.top-nav {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-}
-
-.info-link {
-  background: white;
-  border: 1px solid #333;
-  padding: 8px 15px; /* Increased padding */
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem; /* Increased from 0.8rem */
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.details-panel {
-  background: rgba(255, 255, 255, 0.6);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  font-size: 1.1rem; /* Increased from 0.9rem */
-  border-left: 5px solid #333;
-}
-
 h2 {
-  font-size: 2.2rem; /* Increased from 1.8rem */
+  font-size: 2.5rem; /* Huge Header */
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   background-color: #feece2;
-  border-radius: 0.5rem;
-  padding: 0.8rem;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.amount p, .from p, .to p {
+  font-size: 1.4rem; /* Big Labels */
+  margin-bottom: 8px;
 }
 
 .amount input {
   width: 100%;
   border: 1px solid lightgray;
-  border-radius: 0.75rem;
-  height: 4rem; /* Increased from 3rem */
+  border-radius: 1rem;
+  height: 5rem; /* Very tall input box */
   padding: 0 1.5rem;
-  font-size: 1.4rem; /* Increased from 1rem */
+  font-size: 2rem; /* Huge numbers */
 }
 
 .dropdown {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 1.5rem 0;
-  gap: 15px;
+  margin: 2rem 0;
+  gap: 10px;
 }
 
 .select-container {
@@ -81,44 +65,61 @@ h2 {
   flex-direction: column;
   align-items: center;
   background-color: #feece2;
-  border-radius: 1rem;
-  border: 1px solid #333;
-  padding: 0.8rem; /* Increased padding */
-  width: 200px; /* Increased width */
+  border-radius: 1.5rem;
+  border: 2px solid #333;
+  padding: 1rem;
+  width: 45%; /* Maximize width of select boxes */
 }
 
 .select-container img {
-  width: 60px; /* Increased from 45px */
-  margin-bottom: 8px;
+  width: 80px; /* Bigger Flags */
+  margin-bottom: 10px;
 }
 
 .swap-icon-wrapper {
   cursor: pointer;
   background: white;
-  padding: 15px; /* Increased from 10px */
+  padding: 15px;
   border-radius: 50%;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  border: 2px solid #333;
 }
 
 .msg {
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   text-align: center;
   background: #fff;
   border-radius: 2rem;
-  padding: 1.5rem; /* Increased padding */
+  padding: 2rem;
   font-weight: bold;
-  font-size: 1.3rem; /* Increased from default */
+  font-size: 1.8rem; /* Huge Results */
+  color: #333;
 }
 
 button[type="submit"] {
   width: 100%;
-  height: 4.5rem; /* Increased from 3.5rem */
+  height: 5.5rem; /* Massive Button */
   background-color: #feece2;
-  border-radius: 1rem;
-  border: 2px dashed #333;
-  font-size: 1.5rem; /* Increased from 1.2rem */
+  border-radius: 1.5rem;
+  border: 3px dashed #333;
+  font-size: 1.8rem;
   cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button[type="submit"]:active {
+  transform: scale(0.95);
+}
+
+/* Info Section Styles */
+.top-nav { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+.info-link {
+  background: white;
+  border: 1px solid #333;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
   font-weight: bold;
 }
