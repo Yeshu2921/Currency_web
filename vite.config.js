@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Currency_web/', // Ensures assets load correctly on GitHub Pages
+  base: '/Currency_web/',  // This MUST match your repo name exactly
   server: {
-    port: 355,              // Fixed: Must be inside "server"
-    strictPort: true,       // Fixed: Capital "P" and inside "server"
+    port: 3550,            // Moved inside server and changed to a safer port
+    strictPort: true,
   },
 })
