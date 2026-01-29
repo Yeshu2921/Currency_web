@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { ArrowLeftRight, Info } from "lucide-react";
+import { ArrowLeftRight } from "lucide-react";
 import { countryData, currencyOptions } from "./codes";
 import "./App.css";
 
@@ -10,29 +10,21 @@ function App() {
   const [amount, setAmount] = useState(1);
   const [fromCurr, setFromCurr] = useState({ value: "USD", label: "USD" });
   const [toCurr, setToCurr] = useState({ value: "INR", label: "INR" });
-  const [resultMsg, setResultMsg] = useState("Fetching rate...");
+  const [resultMsg, setResultMsg] = useState("Fetching...");
   const [displayInfo, setDisplayInfo] = useState(false);
 
   const updateExchangeRate = async () => {
-    let amtVal = amount < 1 ? 1 : amount;
     try {
-      const URL = `${BASE_URL}/${fromCurr.value.toLowerCase()}.json`;
-      const response = await fetch(URL);
+      const response = await fetch(`${BASE_URL}/${fromCurr.value.toLowerCase()}.json`);
       const data = await response.json();
       const rate = data[fromCurr.value.toLowerCase()][toCurr.value.toLowerCase()];
-      const finalAmount = (amtVal * rate).toFixed(2);
-      setResultMsg(`${amtVal} ${fromCurr.value} = ${finalAmount} ${toCurr.value}`);
-    } catch (error) {
-      setResultMsg("Error fetching rate!");
+      setResultMsg(`${amount} ${fromCurr.value} = ${(amount * rate).toFixed(2)} ${toCurr.value}`);
+    } catch (e) {
+      setResultMsg("Error!");
     }
   };
 
   useEffect(() => { updateExchangeRate(); }, []);
-
-  const handleSwap = () => {
-    setFromCurr(toCurr);
-    setToCurr(fromCurr);
-  };
 
   const selectStyles = {
     control: (base) => ({
@@ -40,7 +32,8 @@ function App() {
       background: "transparent",
       border: "none",
       boxShadow: "none",
-      minWidth: "120px",
+      fontSize: "1.2rem",
+      fontWeight: "bold",
     }),
   };
 
@@ -48,7 +41,7 @@ function App() {
     <div className="container">
       <div className="top-nav">
         <button className="info-link" onClick={() => setDisplayInfo(!displayInfo)}>
-          <Info size={14} /> {displayInfo ? "Hide Details" : "Show Info"}
+          {displayInfo ? "Hide" : "Show Info"}
         </button>
       </div>
 
@@ -64,28 +57,22 @@ function App() {
       <form onSubmit={(e) => { e.preventDefault(); updateExchangeRate(); }}>
         <div className="amount">
           <p>Enter Amount</p>
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} min="1" />
+          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </div>
 
         <div className="dropdown">
-          <div className="from">
-            <p>From</p>
-            <div className="select-container">
-              <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} alt="flag" />
-              <Select options={currencyOptions} value={fromCurr} onChange={setFromCurr} styles={selectStyles} />
-            </div>
+          <div className="select-container">
+            <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} alt="flag" />
+            <Select options={currencyOptions} value={fromCurr} onChange={setFromCurr} styles={selectStyles} isSearchable={false} />
           </div>
 
-          <div className="swap-icon-wrapper" onClick={handleSwap}>
-            <ArrowLeftRight size={24} />
+          <div className="swap-icon-wrapper" onClick={() => { setFromCurr(toCurr); setToCurr(fromCurr); }}>
+            <ArrowLeftRight size={28} />
           </div>
 
-          <div className="to">
-            <p>To</p>
-            <div className="select-container">
-              <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} alt="flag" />
-              <Select options={currencyOptions} value={toCurr} onChange={setToCurr} styles={selectStyles} />
-            </div>
+          <div className="select-container">
+            <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} alt="flag" />
+            <Select options={currencyOptions} value={toCurr} onChange={setToCurr} styles={selectStyles} isSearchable={false} />
           </div>
         </div>
 
