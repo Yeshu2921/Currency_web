@@ -29,21 +29,6 @@ function App() {
 
   useEffect(() => { updateExchangeRate(); }, []);
 
-  const handleSwap = () => {
-    setFromCurr(toCurr);
-    setToCurr(fromCurr);
-  };
-
-  const selectStyles = {
-    control: (base) => ({
-      ...base,
-      background: "transparent",
-      border: "none",
-      boxShadow: "none",
-      minWidth: "120px",
-    }),
-  };
-
   return (
     <div className="container">
       <div className="top-nav">
@@ -61,37 +46,7 @@ function App() {
         </div>
       )}
 
-      <form onSubmit={(e) => { e.preventDefault(); updateExchangeRate(); }}>
-        <div className="amount">
-          <p>Enter Amount</p>
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} min="1" />
-        </div>
-
-        <div className="dropdown">
-          <div className="from">
-            <p>From</p>
-            <div className="select-container">
-              <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} alt="flag" />
-              <Select options={currencyOptions} value={fromCurr} onChange={setFromCurr} styles={selectStyles} className="react-select-container" />
-            </div>
-          </div>
-
-          <div className="swap-icon-wrapper" onClick={handleSwap}>
-            <ArrowLeftRight size={24} />
-          </div>
-
-          <div className="to">
-            <p>To</p>
-            <div className="select-container">
-              <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} alt="flag" />
-              <Select options={currencyOptions} value={toCurr} onChange={setToCurr} styles={selectStyles} className="react-select-container" />
-            </div>
-          </div>
-        </div>
-
-        <div className="msg">{resultMsg}</div>
-        <button type="submit">Get Exchange Rate</button>
-      </form>
+      {/* ... Rest of your Form code ... */}
     </div>
   );
 }

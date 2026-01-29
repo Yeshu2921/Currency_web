@@ -3,9 +3,10 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Currency_web/',  // This MUST match your repo name exactly
+  // FIXED: Ensure this matches your GitHub Repo name
+  base: '/Currency_web/', 
   server: {
-    port: 3550,            // Moved inside server and changed to a safer port
+    port: 3550,
     strictPort: true,
   },
 })

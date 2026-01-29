@@ -5,7 +5,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  min-width: 1000px; /* Forces desktop view */
+  /* Forces desktop view and prevents horizontal overflow issues */
+  min-width: 1000px; 
   background-color: #feece2;
   font-family: "Arial Black", sans-serif;
   overflow-x: auto;
@@ -16,7 +17,7 @@ body {
   padding: 3rem;
   border-radius: 3rem;
   border: 4px groove #feece2;
-  width: 550px; /* Fixed width to prevent overflow */
+  width: 550px; /* Fixed width prevents overflow */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -28,7 +29,7 @@ body {
 }
 
 .info-link {
-  background: none;
+  background: white;
   border: 1px solid #333;
   padding: 5px 10px;
   border-radius: 5px;
@@ -40,12 +41,17 @@ body {
 }
 
 .details-panel {
-  background: rgba(255, 255, 255, 0.4);
-  padding: 10px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 15px;
+  border-radius: 12px;
   margin-bottom: 15px;
   font-size: 0.9rem;
+  border-left: 5px solid #333;
 }
+
+/* ... keep the rest of your existing CSS below ... */
+
+
 
 h2 {
   font-size: 1.8rem;
