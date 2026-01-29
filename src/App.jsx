@@ -19,7 +19,9 @@ function App() {
       const data = await response.json();
       const rate = data[fromCurr.value.toLowerCase()][toCurr.value.toLowerCase()];
       setResultMsg(`${amount} ${fromCurr.value} = ${(amount * rate).toFixed(2)} ${toCurr.value}`);
-    } catch (e) { setResultMsg("Error!"); }
+    } catch (error) {
+      setResultMsg("Error fetching rate!");
+    }
   };
 
   useEffect(() => { updateExchangeRate(); }, []);
@@ -48,27 +50,26 @@ function App() {
 
       {displayInfo && (
         <div className="details-panel">
-          <p><strong>From:</strong> {countryData[fromCurr.value].name}</p>
-          <p><strong>To:</strong> {countryData[toCurr.value].name}</p>
+          <p><strong>From:</strong> {countryData[fromCurr.value].name} ({countryData[fromCurr.value].country})</p>
+          <p><strong>To:</strong> {countryData[toCurr.value].name} ({countryData[toCurr.value].country})</p>
         </div>
       )}
 
-      <form onSubmit={(e) => { e.preventDefault(); updateExchangeRate(); }} style={{display: 'contents'}}>
+      <form onSubmit={(e) => { e.preventDefault(); updateExchangeRate(); }}>
         <div className="amount">
-          <p>Amount</p>
+          <p>Enter Amount</p>
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </div>
 
         <div className="dropdown">
           <div className="select-container">
-            <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} />
+            <img src={`https://flagsapi.com/${countryData[fromCurr.value].flag}/flat/64.png`} alt="flag" />
             <Select 
               options={currencyOptions} 
               value={fromCurr} 
               onChange={setFromCurr} 
               styles={selectStyles} 
               isSearchable={true} 
-              menuPlacement="auto"
             />
           </div>
 
@@ -77,20 +78,19 @@ function App() {
           </div>
 
           <div className="select-container">
-            <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} />
+            <img src={`https://flagsapi.com/${countryData[toCurr.value].flag}/flat/64.png`} alt="flag" />
             <Select 
               options={currencyOptions} 
               value={toCurr} 
               onChange={setToCurr} 
               styles={selectStyles} 
               isSearchable={true} 
-              menuPlacement="auto"
             />
           </div>
         </div>
 
         <div className="msg">{resultMsg}</div>
-        <button type="submit">Get Rate</button>
+        <button type="submit">Get Exchange Rate</button>
       </form>
     </div>
   );
